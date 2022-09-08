@@ -1,7 +1,3 @@
-html {
-    background-color: red;
-}
-
 body, h1, h2, h3, ul, li, p, dd, dt, dl {
     margin: 0px;
     padding: 0px;
@@ -98,6 +94,10 @@ body {
     height: 370px;
     overflow-y: scroll; /*o que estourar o container no eixo y quero que coloque no scroll*/
     grid-column: 2;
+}
+
+.animais-lista li {
+    cursor: pointer;
 }
 
 .animais-lista::-webkit-scrollbar {
@@ -212,3 +212,55 @@ body {
     }
 }
 
+/*esse .js é uma classe q tá lá no HTML caso o javascript não funcione*/
+.js .js-tabcontent section {
+    display: none; /*tem um probleminha de acessibilidade, mas é que tá focando no js*/
+}
+
+.js .js-tabcontent section.ativo {
+    display: block !important;
+    animation: show .5s forwards; /*tempo total de animação .5 segundos, e forwards é pra cada animação ficar no estado final dela, de 'to'*/
+}
+
+/*animação para mostrar que o conteúdo mudou*/
+@keyframes show {
+    from {
+        opacity: 0;
+        transform: translate3d(-30px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/*quando passa o mouse por cima, não indica que é clicável. Então vamos tonar clicável - vou inserir aqui no css mesmo mas lá na parte dos animais-lista - colocou um pointer no cursor */
+
+.js .js-accordion dd {
+    display: none;
+}
+
+.js-accordion dt::after {
+    content: '⬎';
+    margin-left: 10px;
+}
+
+.js-accordion dt.ativo::after {
+    content: '⬏';
+}
+
+.js-accordion dd.ativo {
+    display: block;
+    animation: slideDown .5s forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        max-height: 200px; /*não pode por auto, então coloca um max height bem maior do que temos de texto pra não ficar por cima*/
+        opacity: 1;
+    }
+}
